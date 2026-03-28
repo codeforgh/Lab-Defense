@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Animations/zombie.controller.meta
 guid: 3d77f3cda9b03d74a8dc5cd9bd361467
+=======
+guid: 571373ec06c644f4784976afbdb0b63a
+>>>>>>> parent of 1a1634e (Zombies animations and Guns are done and working):Assets/zombie.controller.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 9100000

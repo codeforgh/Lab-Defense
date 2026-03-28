@@ -9,6 +9,9 @@ public class GunShooting : MonoBehaviour
     public float fireRate = 1f;
     public float health = 3f;
 
+    // NEW: Bullet spawn offset (position relative to gun)
+    public Vector2 bulletSpawnOffset = Vector2.zero;
+
     private float nextFireTime = 0f;
     private bool isDestroying = false;
     private SpriteRenderer gunSprite;
@@ -20,6 +23,7 @@ public class GunShooting : MonoBehaviour
 
         // Log that gun is working
         Debug.Log("Gun started! Shooting at " + fireRate + " shots per second");
+        Debug.Log("Bullet spawn offset: " + bulletSpawnOffset);
     }
 
     void Update()
@@ -34,8 +38,11 @@ public class GunShooting : MonoBehaviour
 
     void ShootStraight()
     {
-        // Create bullet at gun position
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        // Calculate spawn position with offset
+        Vector3 spawnPosition = transform.position + (Vector3)bulletSpawnOffset;
+
+        // Create bullet at calculated position
+        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
 
         // Get bullet's rigidbody
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -43,8 +50,8 @@ public class GunShooting : MonoBehaviour
         if (rb != null)
         {
             // Shoot bullet straight to the right (positive X direction)
-            rb.velocity = Vector2.right * bulletSpeed;
-            Debug.Log("Bullet fired straight!");
+            rb.linearVelocity = Vector2.right * bulletSpeed;
+            Debug.Log("Bullet fired from position: " + spawnPosition);
         }
         else
         {
